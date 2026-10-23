@@ -1,0 +1,288 @@
+
+<!DOCTYPE html>
+<html lang='el'>
+<head>
+	<meta charset='UTF-8'>
+    <title>Δημόσια μνημεία της Φλώρινας: μαθητεία στην τοπική ιστορία μέσω Digital Humanities</title>
+    
+	<script src="//api.simile-widgets.org/exhibit/current/exhibit-api.js" type="text/javascript"></script>    
+	<link async rel="exhibit-extension" href="//api.simile-widgets.org/exhibit/current/extensions/map/map-extension.js" data-ex-apikey="AIzaSyDERy4_aYQH8tq6X9HhkOdQuuj0yFQ8K60" type="text/javascript"/>
+	<link rel="exhibit-extension" href="//api.simile-widgets.org/exhibit/current/extensions/time/time-extension.js"/>
+
+    <link href="https://docs.google.com/spreadsheets/d/e/2PACX-1vS3i4IogT7myia7UOkso1w0-zaX653ufcMxTRDUMghcEqbLlMbqzAjWUenseCDDNEw4fEVwRcVp5mwO/pub?output=csv" type="text/csv" rel="exhibit/data"/>
+    <!--<link href="https://www.learn4change.gr/onlineapps/florina-dimosia-mnimeia/dimosia_mnimeia.json" type="application/json" rel="exhibit-data"/>-->
+
+    <link href="files/common.css" type="text/css" rel="stylesheet"/>
+    <link href="files/styles.css" type="text/css" rel="stylesheet"/>
+    <link href="files/cwrc.js" type="text/css" rel="stylesheet"/>
+    <link href="files/spiderfy.min.js" type="text/css" rel="stylesheet"/>
+	
+	<!--<link href="dokimastiko.json" type="application/json" rel="exhibit/data" />-->
+	
+	<script type="text/javascript">
+        var rowStyler = function(item, database, tr) {
+            var party = database.getObject(item, "κατηγορία");
+            var color = "#d8dade";
+            switch (party) {
+            case "ΕΝΝΟΙΕΣ":        				color = "#D32F2F"; break;
+            case "ΕΝΟΠΛΗ ΒΙΑ":              	color = "#0fb2bd"; break;
+			case "ΕΠΙΣΤΗΜΕΣ-ΠΟΛΙΤΙΣΜΟΣ-ΤΕΧΝΕΣ":	color = "#b3bd0f"; break;
+			case "ΘΡΗΣΚΕΙΑ":              		color = "#007900"; break;
+			case "ΠΟΛΙΤΙΚΗ":          			color = "#F57C00"; break;
+			case "ΣΩΜΑΤΑ ΑΣΦΑΛΕΙΑΣ": 			color = "#a48eee"; break;
+		  }
+            tr.style.background = color;
+        };	
+		
+		function timelineConfig (div, eventSource) {
+			console.log("timelineConstructor was called");
+			div.style.height="350px";
+			div.style.width = '100%'
+			
+			var theme = Timeline.ClassicTheme.create();
+				theme.timeline_start = new Date(Date.UTC(1951,1,1));
+				theme.timeline_stop  = new Date(Date.UTC(2030,12,31));
+				theme.event.bubble.width = 300;
+			
+			var d = new Date(1960,8,28);
+			theme.ether.backgroundColors[1] = theme.ether.backgroundColors[0];
+			bandInfos = [		
+				Timeline.createBandInfo({
+					width: "80%",
+					intervalUnit: SimileAjax.DateTime.YEAR,
+					intervalPixels: 60,
+					eventSource: eventSource,
+					date: d,
+					theme: theme
+				}),
+				Timeline.createBandInfo({
+					width: "20%",
+					intervalUnit: SimileAjax.DateTime.DECADE,
+					intervalPixels: 80,
+					eventSource: eventSource,
+					date: d,
+					overview: true,
+					theme: theme
+				})
+			];
+			bandInfos[0].decorators = [
+				new Timeline.SpanHighlightDecorator({
+					startDate: "Aug 28 1960 00:00:00 GMT",
+					endDate: "Nov 1 2025 00:00:00 GMT",
+					color: "#efc728",
+					opacity: 20,
+					startLabel: "πρώτο μνημείο",
+					endLabel: "τελευταίο μνημείο",
+					theme: theme
+				})
+			];
+			
+			bandInfos[1].decorators = [
+				new Timeline.SpanHighlightDecorator({
+					startDate: "Aug 28 1960 00:00:00 GMT",
+					endDate: "Sep 20 2024 00:00:00 GMT",
+					color: "#efc728",
+					opacity: 20,
+					startLabel: "πρώτο μνημείο",
+					endLabel: "τελευταίο μνημείο",
+					theme: theme
+				})
+			];
+			bandInfos[1].highlight = true;
+			bandInfos[1].syncWith = 0;
+			tl = Timeline.create(div, bandInfos, Timeline.HORIZONTAL);
+			window.tl = tl;
+			return tl;
+		}
+		
+    </script>
+	
+</head> 
+
+<body>
+	<table id="frame">		
+		<tr>			
+			<td id="sidebar">
+				
+					<div class="header1">Δημόσια μνημεία της Φλώρινας:</div>
+					<div class="header2">μαθητεία στην τοπική ιστορία μέσω Digital Humanities</div>
+					<br><br>
+					
+					<div ex:role="coordinator" id="bubble-coordinator"></div>					
+					
+					<section>
+						<a href="files/info.html"  
+							onclick="window.open('files/info.html', 'newwindow', 'width=500,height=500,top=220px,left=320px'); 
+									return false;">ΠΛΗΡΟΦΟΡΙΕΣ</a>
+						<br>
+						<a href="files/help.html"  
+							onclick="window.open('files/help.html', 'newwindow', 'width=500,height=500,top=220px,left=320px');  
+									return false;">ΟΔΗΓΙΕΣ ΧΡΗΣΗΣ</a>
+						<br>	
+						<a href="files/creator.html"  
+							onclick="window.open('files/creator.html',  'newwindow', 'width=500,height=300,top=220px,left=320px'); 
+									return false;">ΔΗΜΙΟΥΡΓΟΣ</a>
+						<br>
+						<a href="files/licence.html"  
+							onclick="window.open('files/licence.html',  'newwindow', 'width=500,height=300,top=220px,left=320px'); 
+									return false;">ΑΔΕΙΟΔΟΤΗΣΗ</a>
+					</section>
+					
+					<section>
+						<div id="exhibit-browse-panel"><strong>ΑΝΑΖΗΤΗΣΗ:</strong></div>
+						<div ex:role="facet" 
+							 ex:facetclass="TextSearch">
+						</div>
+					</section>
+					
+				<div class="sidebar-scroll">
+					<br><hr><br>
+					
+					<section>
+						<div id="cloud" ex:role="facet" class="cloud" 
+										ex:facetClass="Cloud" 
+										ex:expression=".label" 
+										ex:facetlabel="ΤΙΤΛΟΣ ΜΝΗΜΕΙΟΥ" 
+										ex:height="9em">
+						</div>
+					</section>
+					
+					<br><hr><br>
+				
+					<section >	
+						<div id="exhibit-browse-panel"><strong>ΦΙΛΤΡΑ:</strong></div><br>
+						<div ex:role="facet" ex:expression=".κατηγορία" ex:facetlabel="Κατηγορία" ex:height="10em"></div>
+						<div ex:role="facet" ex:expression=".υποκατηγορία" ex:facetlabel="Υποκατηγορία" ex:height="9em"></div>
+						<div ex:role="facet" ex:expression=".type" ex:facetlabel="Είδος" ex:height="9em"></div> 
+						<div ex:role="facet" ex:expression=".period" ex:facetlabel="Ιστορική περίοδος" ex:height="7em"></div>
+						<div ex:role="facet" ex:expression=".time" ex:facetlabel="Αιώνας" ex:height="9em"></div>
+						<div ex:role="facet" ex:expression=".installation-decade" ex:facetlabel="Τοποθέτηση μνημείου (δεκαετία)" ex:height="9em"></div>
+						
+						<div id="slider"
+							 ex:role="facet"
+							 ex:facetlabel="Τοποθέτηση μνημείου (έτος)" 
+							 expression="add (.startDate)" 
+							 ex:facetClass="Slider" 
+							 ex:horizontal="true"  
+							 ex:histogram="true"
+							 ex:width="260px"
+							 ex:height="5em"
+							 ex:slider-min="1960" 
+							 ex:slider-max="2025"
+							 ex:step="1"
+							 em">
+						</div><br>
+						
+						<div ex:role="facet" ex:expression=".αναπαράσταση" ex:facetlabel="Αναπαράσταση" ex:height="3.5em"></div>
+						<div ex:role="facet" ex:expression=".φύλο" ex:facetlabel="Φύλο" ex:height="7em"></div>
+						<div ex:role="facet" ex:expression=".δημιουργός" ex:facetlabel="Δημιουργός" ex:height="9em"></div>
+						<div ex:role="facet" ex:expression=".καταγωγή" ex:facetlabel="Καταγωγή δημιουργού" ex:height="9em"></div>
+						<div ex:role="facet" ex:expression=".τοποθεσία-είδος" ex:facetlabel="Είδος τοποθεσίας" ex:height="12em"></div>
+						<div ex:role="facet" ex:expression=".κατεύθυνση" ex:facetlabel="Κατεύθυνση" ex:height="7em"></div><br><br><br><br>
+					</section>		
+				</div>
+			</td>
+				
+			<td id="content">
+
+				<!--Χρώματα φυσαλίδων-->
+				<div ex:role="coder" ex:coderClass="Color" id="category-colors">
+					<span ex:color="#D32F2F">ΕΝΝΟΙΕΣ</span>
+					<span ex:color="#0fb2bd">ΕΝΟΠΛΗ ΒΙΑ</span>
+					<span ex:color="#b3bd0f">ΕΠΙΣΤΗΜΕΣ-ΠΟΛΙΤΙΣΜΟΣ-ΤΕΧΝΕΣ</span>
+					<span ex:color="#007900">ΘΡΗΣΚΕΙΑ</span>
+					<span ex:color="#F57C00">ΠΟΛΙΤΙΚΗ</span>
+					<span ex:color="#a48eee">ΣΩΜΑΤΑ ΑΣΦΑΛΕΙΑΣ</span>
+				</div>
+				
+				<div ex:role="viewPanel" id="mapArea">			
+
+				<!--ΧΑΡΤΗΣ-->
+					<div ex:role="view" 
+						 ex:viewclass="Map" 
+						 ex:mapHeight="700" 
+						 ex:label="ΧΑΡΤΗΣ" 
+						 ex:center="40.787258976277236, 21.401903250055554"  
+						 ex:colorcoder="category-colors"
+						 ex:colorkey=".κατηγορία"
+						 ex:zoom="14.3" 
+						 ex:latlng=".latlng">
+					</div>											
+
+					<!--ΧΡΟΝΟΓΡΑΜΜΗ-->
+					<div ex:role="view" 
+						 ex:timelineConstructor="timelineConfig"
+						 ex:viewclass="Timeline" 
+						 ex:label="ΧΡΟΝΟΓΡΑΜΜΗ" 	
+						 ex:start=".installation-time"		
+						 ex:colorkey=".κατηγορία" 
+						 ex:colorcoder="category-colors"
+						 ex:showsummary="true">
+					</div>
+					
+					<div ex:role="lens" class="map-lens" style="display: none">
+						<table>
+							<tr>                
+								<td>
+									<img ex:src-content=".imageURL" /><br><br>
+									<div align="center"><a ex:href-content=".image-link" target="_blank">Μεγαλύτερη εικόνα</a><br><br></div><hr>
+									<div align="center"><b><span ex:content=".label"></span></b></div><hr>
+									<b>Εγκατάσταση:</b> <span ex:content=".startDate" class="installation-time"></span><br>
+									<b>Είδος τοποθεσίας:</b> <span ex:content=".τοποθεσία-είδος" class="τοποθεσία-είδος"></span><br>
+									<b>Κατεύθυνση:</b> <span ex:content=".κατεύθυνση" class="κατεύθυνση"></span><hr>
+									<b>Κατηγορία:</b> <span ex:content=".κατηγορία" class="category"></span><br>
+									<b>Υποκατηγορία:</b> <span ex:content=".υποκατηγορία" class="υποκατηγορία"></span>				
+								</td>
+							</tr>								
+						</table>
+					</div>
+					
+					<!--ΚΑΡΤΕΛΕΣ-->			
+					<div ex:role="view"
+						 ex:viewClass="Thumbnail"
+						 ex:label="ΚΑΡΤΕΛΕΣ"
+						 ex:showAll="true"
+						 ex:paginate="false"
+						 ex:orders=".τίτλος"
+						 ex:possibleOrders=".τίτλος, .κατηγορία, .υποκατηγορία, .αναπαράσταση, .φύλο, .δημιουργός, .τοποθεσία-είδος, .κατεύθυνση">
+						
+						<div ex:role="exhibit-lens" class="thumbnail-lens" style="display: none;">
+							<div align="center"><img ex:src-content=".imageURL" /></div><br>
+							<div align="center"><a ex:href-content=".image-link" target="_blank">Μεγαλύτερη εικόνα</a><br><br></div><hr>
+							<div align="center"><b><span ex:content=".label"></span></b></div>
+							<span ex:content=".description" class="description"></span><br><hr>
+							<b>Επίγραμμα:</b> <span ex:content=".epigram" class="epigram"></span><hr>
+							<b>Φορέας:</b> <span ex:content=".entity" class="entity"></span><br>
+							<b>Δημιουργός:</b> <span ex:content=".δημιουργός" class="δημιουργός"></span><br>
+							<b>Καταγωγή δημιουργού:</b> <span ex:content=".καταγωγή" class="Καταγωγή δημιουργού"></span><br>
+							<b>Υλικό:</b> <span ex:content=".υλικό" class="υλικό"></span><br>
+							<b>Είδος μνημείου:</b> <span ex:content=".type" class="type"></span><br>
+							<b>Αναπαράσταση:</b> <span ex:content=".αναπαράσταση" class="αναπαράσταση"></span><br>
+							<b>Εγκατάσταση:</b> <span ex:content=".installation-time" class="installation-time"></span><br>
+							<b>Τοποθεσία:</b> <span ex:content=".τοποθεσία" class="τοποθεσία"></span><br>
+							<b>Είδος τοποθεσίας:</b> <span ex:content=".τοποθεσία-είδος" class="τοποθεσία-είδος"></span><br>
+							<b>Κατεύθυνση:</b> <span ex:content=".κατεύθυνση" class="κατεύθυνση"></span><hr>
+							<b>Φύλο:</b> <span ex:content=".φύλο" class="φύλο"></span><br>
+							<b>Ιστορική περίοδος:</b> <span ex:content=".period" class="period"></span><br>
+							<b>Αιώνας:</b> <span ex:content=".time" class="time"></span><br><hr>
+							<b>Κατηγορία:</b> <span ex:content=".κατηγορία" class="category"></span><br>
+							<b>Υποκατηγορία:</b> <span ex:content=".υποκατηγορία" class="υποκατηγορία"></span>
+						</div>
+					</div>
+
+					<!--ΠΙΝΑΚΑΣ-->
+					<div ex:role="view" 
+						ex:viewclass="Tabular" 
+						ex:label="ΠΙΝΑΚΑΣ"
+						ex:rowStyler="rowStyler"
+						ex:columns=".label, .κατηγορία, .υποκατηγορία, .type, .period, .time, .αναπαράσταση, .φύλο, .δημιουργός, .καταγωγή, .τοποθεσία-είδος, .κατεύθυνση" 
+						ex:columnlabels="Τίτλος, Κατηγορία, Υποκατηγορία, Είδος, Ιστορική περίοδος, Αιώνας, Αναπαράσταση, Φύλο, Δημιουργός, Καταγωγή δημιουργού, Είδος τοποθεσίας, Κατεύθυνση">
+					</div>					
+				</div><br>
+				
+				<div id="logo" align="center" ex:role="logo" ex:color="DarkRed"></div>				
+			</td>
+		</tr>			
+	</table>
+</body>
+</html>
